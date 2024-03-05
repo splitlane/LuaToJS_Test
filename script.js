@@ -1948,9 +1948,18 @@ var get,document,window;get=function(id){return document.getElementById(id);};wi
 
 try {    
 
-get(new Uint8Array([106,115])).value=window.luatojs(get(new Uint8Array([108,117,97])).value);
 
-get('jsTotal').value=rt + window.luatojs(get(new Uint8Array([108,117,97])).value);
+let js = window.luatojs(get(new Uint8Array([108,117,97])).value);
+
+const options = { indent_size: 2, space_in_empty_paren: false };
+let jsB = js_beautify(js, options);
+
+
+
+    
+get(new Uint8Array([106,115])).value=jsB;
+
+get('jsTotal').value=rt + jsB;
 } catch (error) {
     get('js').value = error;
 }
